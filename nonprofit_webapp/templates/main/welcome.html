@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+home
+{% endblock title %}
+
+{% block content %}
+<h2 class="ui center aligned icon header">
+    <i class="circular users icon"></i>
+    Welcome to the Non Profit Web App
+</h2>
+
+
+{% endblock content %}
+
+{% block scripts %}
+<script>
+    $(document).ready(function(){
+        console.log("home page loaded by script")
+    })
+</script>
+{% endblock scripts %}
