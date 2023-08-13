@@ -15,6 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+# import settings and static
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 # import views
 from .views import welcome_view
@@ -26,3 +30,8 @@ urlpatterns = [
     path("profiles/", include("profiles.urls")),
     path("volunteer_listing/", include("volunteer_listing.urls"))
 ]
+
+
+# add static file urls - customization
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

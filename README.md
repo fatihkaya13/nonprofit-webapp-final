@@ -5,3 +5,6 @@ python3 manage.py runserver
 
 superuser
 fatih/manager
+
+testuser1
+test123+!A

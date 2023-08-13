@@ -119,10 +119,16 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
-# ADDING STATIC
+# ADDING STATIC CODE FILES - customization
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static_code_files')
 ]
+
+# CONFIGURE STATIC CONTENT - customization
+STATIC_ROOT = os.path.join(BASE_DIR, "static_content", "static_root")
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "static_content", "media_root")
 
 
 # Default primary key field type
