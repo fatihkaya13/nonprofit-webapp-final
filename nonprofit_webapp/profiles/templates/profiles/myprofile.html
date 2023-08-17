@@ -66,6 +66,20 @@
                                 <td>bio</td>
                                 <td>{{profile.biography}}</td>
                             </tr>
+                            <tr>
+                                <td>profile type</td>
+                                <td>{{profile.type}}</td>
+                            </tr>
+                            <tr>
+                                <td>List of applied jobs</td>
+                                <td>
+                                    <ul>
+                                        {% for job in profile.get_applied_jobs  %}
+                                            <li>{{job}} </li>
+                                        {% endfor %}
+                                    </ul>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

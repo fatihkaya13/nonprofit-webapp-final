@@ -33,8 +33,8 @@ class Profile(models.Model):
     updated = models.DateTimeField(auto_now=True)
     # created field to hold when profile is created
     created = models.DateTimeField(auto_now_add=True)
-
-    applied_job = models.ForeignKey(Job, null=True, on_delete=models.CASCADE, related_name='jobs')
+    # created field to hold applied jobs
+    applied_job = models.ManyToManyField(Job, null=True, blank=True, related_name="applied_job")
 
     def __str__(self):
         return f"{self.user.username}"
@@ -73,6 +73,9 @@ class Profile(models.Model):
         # update current slug
         self.slug = to_slug
         super().save(*args, **kwargs)
+
+    def get_applied_jobs(self):
+        return self.applied_job.all()
 
 
 

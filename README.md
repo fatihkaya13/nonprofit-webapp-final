@@ -6,8 +6,11 @@ python3 manage.py runserver
 superuser
 fatih/manager
 
+users
 testuser1
-test123+!A
+testuser2
+
+password: test123+!A
 
 
 # interactive shell

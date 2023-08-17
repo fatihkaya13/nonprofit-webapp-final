@@ -2,12 +2,13 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Profile
 from .forms import ProfileModelForm
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def index(request):
     return HttpResponse("welcome to profiles app")
 
-
+@login_required
 def my_home_page_view(request):
     # get profile for requested user
     profile = Profile.objects.get(user=request.user)

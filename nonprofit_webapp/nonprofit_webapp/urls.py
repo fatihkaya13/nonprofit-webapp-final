@@ -28,7 +28,8 @@ urlpatterns = [
     path("", welcome_view, name="welcome-view"),
     path("donations/", include("donations.urls")),
     path("profiles/", include("profiles.urls")),
-    path("volunteer_listing/", include("volunteer_listing.urls"))
+    path("volunteer_listing/", include("volunteer_listing.urls")),
+    path('accounts/', include('allauth.urls')),
 ]
 
 
