@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block title %}Volunteer Opportunities{% endblock title %}
+
+{% block content %}
+<h3 class="ui header">
+    Volunteer Opportunities
+</h3>
+<div class="ui grid">
+    <div class="eleven wide column justified">
+        <div class="ui divided items">
+            {% for job in jobs %}
+            <div class="item">
+                <div class="image">
+                <img src={{job.image.url}}>
+                </div>
+                    <div class="content">
+                    <a class="header">{{ job.title }}</a>
+                    <div class="meta">
+                        <span class="organization">{{job.organization }}</span>
+                    </div>
+                    <div class="description">
+                        <p>{{job.description}}</p>
+                    </div>
+                    <div class="description">
+                        <i class="globe icon"></i>
+                        <span class="country">{{job.location}}</span>
+                    </div>
+                    <div class="extra">
+                        <div class="ui label">{{job.job_type}}</div>
+                        <div class="ui label">{{job.location_type}}</div>
+
+                    </div>
+                    <div class="extra">
+                        <div class="row">
+                            Tags &nbsp;
+                            {% for job_tag in job.get_tags%}
+                            <div class="ui teal tag label">
+                                {{job_tag}}
+                            </div>
+                            {% endfor %}
+                            <div class="ui right floated primary button">
+                                Apply
+                                <i class="right chevron icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+          {% comment %} <div class="item">
+            <div class="image">
+              <img src="/images/wireframe/image.png">
+            </div>
+            <div class="content">
+              <a class="header">Youth Program Coordinator for Refugees in Greece</a>
+              <div class="ui hidden divider"></div>
+              <div class="meta">
+                  <h4 class="organization">Organization: Second Tree</h4>
+                  <div class="description">
+                      <p>Stay in a animal sanctuary and help us take care of the animals, dogs, cats and farm animals in need</p>
+                  </div>
+                  <div class="ui hidden divider"></div>
+                  <div class="ui four column grid">
+                      <div class="row">
+                        <div class="column">
+                          <div class="ui label">
+                              <i class="map marker icon"></i> On site
+                          </div>
+                        </div>
+                        <div class="column">
+                          <div class="ui label">Full Time</div>
+                        </div>
+                      </div>
+                      <div class="row">
+                          <div class="column">Greece</div>
+                      </div>
+                      <div class="row">
+                          <div class="column">Created 1 month ago</div>
+                      </div>
+              </div>
+              <div class="extra">
+                  <div class="ui right floated primary button">
+                    Buy tickets
+                    <i class="right chevron icon"></i>
+                  </div>
+                </div>
+            </div>
+          </div> {% endcomment %}
+{% endblock content %}

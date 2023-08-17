@@ -8,3 +8,10 @@ fatih/manager
 
 testuser1
 test123+!A
+
+
+# interactive shell
+python manage.py shell
+from volunteer_listing.models import Job
+import os
+os.system('clear')

@@ -1,4 +1,6 @@
 {% url 'welcome-view' as path_to_welcome %}
+{% url 'profiles:my-home-page-view' as path_to_my_home_page %}
+
 <div class="ui inverted menu nav mb-7">
     <div class="ui container">
       <a href="{{path_to_welcome}}" class="active item">
@@ -28,13 +30,17 @@
                   </div>
                </div>
           </div>
-              <a href="" class="active item">
-                Login
-              </a>
+          <a href="{{path_to_my_home_page}}" class="{% if request.path == path_to_my_home_page %}active{% endif %} item">
+            <img src={{picture.url}} class="ui avatar image">&nbsp;
+             {{ request.user }}
+         </a>
+        <a href="" class="active item">
+        Login
+        </a>
 
-              <a href="" class="ui item">
-                  Logout
-              </a>
+        <a href="" class="ui item">
+            Logout
+        </a>
       </div>
     </div>
   </div>

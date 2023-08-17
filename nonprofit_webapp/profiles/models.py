@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.db.models import Q
 from django.template.defaultfilters import slugify
 from .utils import get_random_code
-
+from volunteer_listing.models import Job
 
 # Create your models here.
 class Profile(models.Model):
@@ -33,6 +33,8 @@ class Profile(models.Model):
     updated = models.DateTimeField(auto_now=True)
     # created field to hold when profile is created
     created = models.DateTimeField(auto_now_add=True)
+
+    applied_job = models.ForeignKey(Job, null=True, on_delete=models.CASCADE, related_name='jobs')
 
     def __str__(self):
         return f"{self.user.username}"
