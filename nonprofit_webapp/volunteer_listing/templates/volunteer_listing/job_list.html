@@ -6,6 +6,7 @@
 <h3 class="ui header">
     Volunteer Opportunities
 </h3>
+
 <div class="ui grid">
     <div class="eleven wide column justified">
         <div class="ui divided items">
@@ -39,9 +40,35 @@
                                 {{job_tag}}
                             </div>
                             {% endfor %}
-                            <div class="ui right floated primary button">
-                                Apply
-                                <i class="right chevron icon"></i>
+                            {% comment %} VOLUNTEER JOB APPLICATION FORM {% endcomment %}
+
+                            <div class="ui right floated">
+
+                                {% comment %} USER PROFILE DOES NOT EXISTS {% endcomment %}
+                                {% if  profile == None %}
+                                <a href="{% url 'account_signup' %}" class="ui blue basic button">
+                                    Join to Apply
+                                    <i class="right chevron icon"></i>
+                                </a>
+
+                                {% comment %} USER HAS ALREADY APPLIED TO THE JOB {% endcomment %}
+                                {% elif job in profile.get_applied_jobs %}
+                                <button type="" disabled class="ui positive button">
+                                    Applied
+                                    <i class="right check icon"></i>
+                                </button>
+
+                                {% comment %} USER HAS NOT APPLIED TO THE JOB YET {% endcomment %}
+                                {% else %}
+                                <form action="{% url "volunteer_listing:apply-job"%}" method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="job_pk" value={{job.pk}}>
+                                    <button type="submit" class="ui primary button">
+                                        Apply
+                                        <i class="right chevron icon"></i>
+                                    </button>
+                                </form>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -51,43 +78,4 @@
         </div>
     </div>
 </div>
-          {% comment %} <div class="item">
-            <div class="image">
-              <img src="/images/wireframe/image.png">
-            </div>
-            <div class="content">
-              <a class="header">Youth Program Coordinator for Refugees in Greece</a>
-              <div class="ui hidden divider"></div>
-              <div class="meta">
-                  <h4 class="organization">Organization: Second Tree</h4>
-                  <div class="description">
-                      <p>Stay in a animal sanctuary and help us take care of the animals, dogs, cats and farm animals in need</p>
-                  </div>
-                  <div class="ui hidden divider"></div>
-                  <div class="ui four column grid">
-                      <div class="row">
-                        <div class="column">
-                          <div class="ui label">
-                              <i class="map marker icon"></i> On site
-                          </div>
-                        </div>
-                        <div class="column">
-                          <div class="ui label">Full Time</div>
-                        </div>
-                      </div>
-                      <div class="row">
-                          <div class="column">Greece</div>
-                      </div>
-                      <div class="row">
-                          <div class="column">Created 1 month ago</div>
-                      </div>
-              </div>
-              <div class="extra">
-                  <div class="ui right floated primary button">
-                    Buy tickets
-                    <i class="right chevron icon"></i>
-                  </div>
-                </div>
-            </div>
-          </div> {% endcomment %}
 {% endblock content %}

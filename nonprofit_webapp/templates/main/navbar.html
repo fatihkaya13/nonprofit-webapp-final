@@ -1,22 +1,42 @@
 {% url 'welcome-view' as path_to_welcome %}
 {% url 'profiles:my-home-page-view' as path_to_my_home_page %}
-{% url 'volunteer_listing:jobs_list_view' as path_to_volunteer_job_list %}
+{% url 'profiles:my-applied-jobs' as path_to_my_applied_jobs %}
+{% url 'volunteer_listing:jobs-list-view' as path_to_volunteer_job_list %}
 
 <div class="ui inverted menu nav mb-7">
     <div class="ui container">
-      <a href="{{path_to_welcome}}" class="active item">
+      <a href="{{path_to_welcome}}" class="{% if request.path == path_to_welcome %}active{% endif %} item">
           <h3>Our NGO APP</h3>
       </a>
 
-      {% if request.user.is_authenticated %}
       <a href="{{path_to_volunteer_job_list}}" class="{% if request.path == path_to_volunteer_job_list %}active{% endif %} item">
         Volunteer Listing
       </a>
-      {% endif %}
+      <a href="{{my_rooms}}" class="ui item">
+        Donate
+      </a>
 
       <div class="right menu">
           {% if request.user.is_authenticated %}
           <div class="item">
+            <div class="ui inverted floating dropdown icon button olive"> My Donations
+              <i class="dropdown icon"></i>
+              <div class="menu">
+                  <a href="{{path_to_my_applied_jobs}}" class="{% if request.path == path_to_my_applied_jobs %}active{% endif %} item">
+                    Donation History
+                  </a>
+              </div>
+           </div>
+          </div>
+          <div class="item">
+            <div class="ui inverted floating dropdown icon button olive"> My Jobs
+              <i class="dropdown icon"></i>
+              <div class="menu">
+                  <a href="{{path_to_my_applied_jobs}}" class="{% if request.path == path_to_my_applied_jobs %}active{% endif %} item">
+                    Applied Jobs
+                  </a>
+              </div>
+           </div>
           </div>
               <a href="{{path_to_my_home_page}}" class="{% if request.path == path_to_my_home_page %}active{% endif %} item">
                   <img src={{picture.url}} class="ui avatar image">&nbsp;
@@ -27,9 +47,9 @@
               </a>
           {% else %}
           <a href="{% url 'account_login' %}" class="ui item">
-                  Login
-              </a>
+            Login
+          </a>
           {% endif %}
       </div>
     </div>
-  </div>
+ </div>

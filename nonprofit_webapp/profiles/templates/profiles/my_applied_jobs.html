@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}applied jobs{% endblock title %}
+
+{% block content %}
+
+    {% if is_empty %}
+    <div class="ui placeholder segment">
+        <div class="ui icon header">
+          <i class="search icon"></i>
+          We don't have any applied jobs matching your query
+        </div>
+        <div class="inline">
+            <a href="{% url 'volunteer_listing:jobs-list-view' %}" class="ui blue basic button">
+                Find Volunteer Job
+            </a>
+        </div>
+    </div>
+    {% else %}
+        {% for job in my_jobs %}
+        <div class="ui segment">
+            <div class="ui grid">
+                <div class="row">
+                    <div class="three wide column">
+                        <img class="ui image" src={{job.image.url}}>
+                    </div>
+                    <div class="nine wide column">
+                        <h3>{{job.title}}</h3>
+                        <p>{{job.description}}</h3>
+                        <br>
+                        <div class="extra">
+                            <div class="ui label">{{job.job_type}}</div>
+                            <div class="ui label">{{job.location_type}}</div>
+
+                        </div>
+                        <br>
+                         <form action="{% url 'volunteer_listing:withdraw-job-application' %}" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="job_pk" value={{job.pk}}>
+                            <button type="submit" class="ui basic button w-big mb-5">
+                                <i class="undo alternate icon"></i>
+                                Withdraw application
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    {% endif %}
+
+{% endblock content %}

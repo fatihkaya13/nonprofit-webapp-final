@@ -4,87 +4,96 @@
 
 {% block content %}
 
-{% comment %} MODAL {% endcomment %}
-<div class="ui modal myprofile-modal">
-    <i class="close icon"></i>
-    <div class="header">
-      Update your Profile
+{% if is_not_found %}
+<div class="ui placeholder segment">
+    <div class="ui icon header">
+      <i class="user icon"></i>
+      We don't have profile associated with user
     </div>
-    <div class="image content">
-      <div class="ui medium image">
-        <img src="{{profile.avatar.url}}">
-      </div>
-      <div class="description">
-        <div class="ui header">Provide some additional/newest info about you</div>
-        <form action="" method="POST" class="ui form" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{p_form.as_p}}
-      </div>
-    </div>
-        <div class="actions">
-            <div class="ui red deny button">
-                Nope
-            </div>
-            <button type="submit" name="profile_update_button" class="ui positive right labeled icon button">
-                Update
-                <i class="checkmark icon"></i>
-            </button>
-        </form>
-     </div>
 </div>
-
-
- <div class="ui segment">
-    {% if is_p_form_saved %}
-        <div class="ui green message">Your profile has been updated</div>
-    {% endif %}
-    <h3>my profile: {{request.user}}</h3>
-    <div class="ui grid">
-        <div class="row">
-                <div class="six wide column">
-                    <img class="ui medium rounded image" src={{profile.avatar.url}}>
-                    <div class="row mt-5">
-                        <button class="ui secondary button" id="modal-btn-profile">Update your profile</button>
-                    </div>
+{% else %}
+    {% comment %} MODAL {% endcomment %}
+    <div class="ui modal myprofile-modal">
+        <i class="close icon"></i>
+        <div class="header">
+        Update your Profile
+        </div>
+        <div class="image content">
+        <div class="ui medium image">
+            <img src="{{profile.avatar.url}}">
+        </div>
+        <div class="description">
+            <div class="ui header">Provide some additional/newest info about you</div>
+            <form action="" method="POST" class="ui form" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{p_form.as_p}}
+        </div>
+        </div>
+            <div class="actions">
+                <div class="ui red deny button">
+                    Nope
                 </div>
-                <div class="ten wide column">
-                    <table class="ui table">
-                        <tbody>
-                            <tr>
-                                <td>username</td>
-                                <td>{{profile.user}}</td>
-                            </tr>
-                            <tr>
-                                <td>first name</td>
-                                <td>{{profile.first_name}}</td>
-                            </tr>
-                            <tr>
-                                <td>last name</td>
-                                <td>{{profile.last_name}}</td>
-                            </tr>
-                            <tr>
-                                <td>bio</td>
-                                <td>{{profile.biography}}</td>
-                            </tr>
-                            <tr>
-                                <td>profile type</td>
-                                <td>{{profile.type}}</td>
-                            </tr>
-                            <tr>
-                                <td>List of applied jobs</td>
-                                <td>
-                                    <ul>
-                                        {% for job in profile.get_applied_jobs  %}
-                                            <li>{{job}} </li>
-                                        {% endfor %}
-                                    </ul>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <button type="submit" name="profile_update_button" class="ui positive right labeled icon button">
+                    Update
+                    <i class="checkmark icon"></i>
+                </button>
+            </form>
         </div>
     </div>
- </div>
+
+
+    <div class="ui segment">
+        {% if is_p_form_saved %}
+            <div class="ui green message">Your profile has been updated</div>
+        {% endif %}
+        <h3>my profile: {{request.user}}</h3>
+        <div class="ui grid">
+            <div class="row">
+                    <div class="six wide column">
+                        <img class="ui medium rounded image" src={{profile.avatar.url}}>
+                        <div class="row mt-5">
+                            <button class="ui secondary button" id="modal-btn-profile">Update your profile</button>
+                        </div>
+                    </div>
+                    <div class="ten wide column">
+                        <table class="ui table">
+                            <tbody>
+                                <tr>
+                                    <td>username</td>
+                                    <td>{{profile.user}}</td>
+                                </tr>
+                                <tr>
+                                    <td>first name</td>
+                                    <td>{{profile.first_name}}</td>
+                                </tr>
+                                <tr>
+                                    <td>last name</td>
+                                    <td>{{profile.last_name}}</td>
+                                </tr>
+                                <tr>
+                                    <td>bio</td>
+                                    <td>{{profile.biography}}</td>
+                                </tr>
+                                <tr>
+                                    <td>profile type</td>
+                                    <td>{{profile.type}}</td>
+                                </tr>
+                                <tr>
+                                    <td>List of applied jobs</td>
+                                    <td>
+                                        <ul>
+                                            {% for job in profile.get_applied_jobs  %}
+                                                <li>{{job}} </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+            </div>
+        </div>
+    </div>
+ {%endif%}
 
 {% endblock content %}
