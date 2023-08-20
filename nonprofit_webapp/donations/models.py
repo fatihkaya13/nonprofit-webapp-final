@@ -14,9 +14,13 @@ class Donation(models.Model):
         ('Annually', 'Annually'),
     ]
     frequency = models.CharField(choices=FREQUENCY_TYPE, default='One-time', max_length=20)
-    updated = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
     def __str__(self):
         return self.name
+
+    # show newest donation on top
+    class Meta:
+        ordering = ('-created',)

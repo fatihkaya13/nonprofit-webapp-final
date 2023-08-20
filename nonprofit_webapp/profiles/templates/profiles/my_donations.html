@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}applied jobs{% endblock title %}
+
+{% block content %}
+
+    {% if is_empty %}
+    <div class="ui placeholder segment">
+        <div class="ui icon header">
+          <i class="search icon"></i>
+          You don't have any donations
+        </div>
+        <div class="inline">
+            <a href="{% url 'donations:donate' %}" class="ui blue basic button">
+                Make a donation
+            </a>
+        </div>
+    </div>
+    {% else %}
+        {% for donation in my_donations %}
+        <div class="ui segment">
+            <div class="ui grid">
+                <div class="row">
+                    <div class="five wide column">
+                        <h3>{{donation.name}}</h3>
+                        <br>
+                        <div class="extra">
+                            <div class="ui massive green circular label">{{donation.amount}}</div>
+                            <br></br>
+                            <div class="ui label">
+                                <p><i class="calendar icon"></i> {{ donation.created|date:"d.m.Y H:i" }}</p>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    {% endif %}
+
+{% endblock content %}

@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Profile, Jobapplication
+from donations.models import Donation
 from .forms import ProfileModelForm
 from django.contrib.auth.decorators import login_required
 # Create your views here.
@@ -44,7 +45,6 @@ def my_home_page_view(request):
 @login_required
 def my_applied_jobs_view(request):
     is_empty = False
-    # my_jobs = Profile.objects.get(user=request.user).applied_job.all()
     # get profile for requested user
     profile = Profile.objects.get(user=request.user)
     my_jobs = Jobapplication.objects.filter(applicant=profile).all()
@@ -55,3 +55,16 @@ def my_applied_jobs_view(request):
     }
     print(data)
     return render(request, "profiles/my_applied_jobs.html", data)
+
+
+@login_required
+def my_donations_view(request):
+    is_empty = False
+    my_donations = Donation.objects.filter(user=request.user).all()
+    is_empty = False if len(my_donations) > 0 else True
+    data = {
+        "my_donations": my_donations,
+        "is_empty": is_empty
+    }
+    print(data)
+    return render(request, "profiles/my_donations.html", data)

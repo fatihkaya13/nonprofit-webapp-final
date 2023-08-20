@@ -3,6 +3,7 @@
 {% url 'profiles:my-applied-jobs' as path_to_my_applied_jobs %}
 {% url 'volunteer_listing:jobs-list-view' as path_to_volunteer_job_list %}
 {% url 'donations:donate' as path_to_donation_form %}
+{% url 'profiles:my-donations' as path_to_my_donations %}
 
 <div class="ui inverted menu nav mb-7">
     <div class="ui container">
@@ -23,7 +24,7 @@
             <div class="ui inverted floating dropdown icon button olive"> My Donations
               <i class="dropdown icon"></i>
               <div class="menu">
-                  <a href="{{path_to_my_applied_jobs}}" class="{% if request.path == path_to_my_applied_jobs %}active{% endif %} item">
+                  <a href="{{path_to_my_donations}}" class="{% if request.path == path_to_my_donations %}active{% endif %} item">
                     Donation History
                   </a>
               </div>
