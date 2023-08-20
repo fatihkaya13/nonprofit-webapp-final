@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "donations",
     "volunteer_listing",
     "profiles",
+    "djmoney",
     #ALLAUTH
     "django.contrib.sites",
     "allauth",
@@ -51,6 +52,10 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 
 ]
+
+DEFAULT_CURRENCY = 'USD'
+CURRENCIES = ('EUR', 'USD', 'GBP')
+
 
 # authentication redirect
 LOGIN_REDIRECT_URL = '/volunteer_listing'
@@ -115,7 +120,7 @@ WSGI_APPLICATION = "nonprofit_webapp.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "NAME": BASE_DIR / "dbv2.sqlite3",
     }
 }
 

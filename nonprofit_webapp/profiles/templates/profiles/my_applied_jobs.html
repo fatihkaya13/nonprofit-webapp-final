@@ -17,31 +17,49 @@
         </div>
     </div>
     {% else %}
-        {% for job in my_jobs %}
+        {% for obj in my_jobs %}
         <div class="ui segment">
             <div class="ui grid">
                 <div class="row">
                     <div class="three wide column">
-                        <img class="ui image" src={{job.image.url}}>
+                        <img class="ui image" src={{obj.job.image.url}}>
                     </div>
                     <div class="nine wide column">
-                        <h3>{{job.title}}</h3>
-                        <p>{{job.description}}</h3>
+                        <h3>{{obj.job.title}}</h3>
+                        <p>{{obj.job.description}}</h3>
                         <br>
                         <div class="extra">
-                            <div class="ui label">{{job.job_type}}</div>
-                            <div class="ui label">{{job.location_type}}</div>
-
+                            <div class="ui label">{{obj.job.job_type}}</div>
+                            <div class="ui label">{{obj.job.location_type}}</div>
                         </div>
                         <br>
+                        {% comment %} Withdraw job application status is visible only for waiting status {% endcomment %}
+                        {% if obj.status == 'Waiting' %}
                          <form action="{% url 'volunteer_listing:withdraw-job-application' %}" method="POST">
                             {% csrf_token %}
-                            <input type="hidden" name="job_pk" value={{job.pk}}>
+                            <input type="hidden" name="job_pk" value={{obj.job.pk}}>
                             <button type="submit" class="ui basic button w-big mb-5">
                                 <i class="undo alternate icon"></i>
                                 Withdraw application
                             </button>
                         </form>
+                        {% endif %}
+                        <br>
+                        {% comment %} job application status {% endcomment %}
+                        {% if obj.status == 'Waiting' %}
+                        <div>
+                            Status: &nbsp; <a class="ui grey label">{{obj.status}}</a>
+                        </div>
+                        {% elif obj.status == 'Approved' %}
+                        <div>
+                            Status: &nbsp; <a class="ui green label">{{obj.status}}</a>
+                        </div>
+                        {% elif obj.status == 'Rejected' %}
+                        <div>
+                            Status: &nbsp; <a class="ui red label">{{obj.status}}</a>
+                        </div>
+                        {% endif %}
+
                     </div>
 
                 </div>

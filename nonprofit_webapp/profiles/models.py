@@ -34,7 +34,7 @@ class Profile(models.Model):
     # created field to hold when profile is created
     created = models.DateTimeField(auto_now_add=True)
     # created field to hold applied jobs
-    applied_job = models.ManyToManyField(Job, null=True, blank=True, related_name="applied_job")
+    applied_job = models.ManyToManyField(Job, blank=True, related_name="applied_job", through="Jobapplication")
 
     def __str__(self):
         return f"{self.user.username}"
@@ -79,3 +79,20 @@ class Profile(models.Model):
 
 
 
+class Jobapplication(models.Model):
+    job = models.ForeignKey(Job, on_delete=models.CASCADE)
+    applicant = models.ForeignKey(Profile, on_delete=models.CASCADE)
+
+    JOB_APPLICATON_STATUS = [
+        ('Approved', 'Approved'),
+        ('Rejected', 'Rejected'),
+        ('Waiting', 'Waiting'),
+    ]
+    status = models.CharField(choices=JOB_APPLICATON_STATUS, default='Waiting', max_length=20)
+    date_applied = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.job.title} / {self.applicant} / {self.status}"
+
+    class Meta:
+        unique_together = [['job', 'applicant']]

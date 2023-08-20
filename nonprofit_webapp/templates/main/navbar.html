@@ -2,6 +2,7 @@
 {% url 'profiles:my-home-page-view' as path_to_my_home_page %}
 {% url 'profiles:my-applied-jobs' as path_to_my_applied_jobs %}
 {% url 'volunteer_listing:jobs-list-view' as path_to_volunteer_job_list %}
+{% url 'donations:donate' as path_to_donation_form %}
 
 <div class="ui inverted menu nav mb-7">
     <div class="ui container">
@@ -12,7 +13,7 @@
       <a href="{{path_to_volunteer_job_list}}" class="{% if request.path == path_to_volunteer_job_list %}active{% endif %} item">
         Volunteer Listing
       </a>
-      <a href="{{my_rooms}}" class="ui item">
+      <a href="{{path_to_donation_form}}" class="ui item">
         Donate
       </a>
 

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Profile
+from .models import Profile, Jobapplication
 from .forms import ProfileModelForm
 from django.contrib.auth.decorators import login_required
 # Create your views here.
@@ -44,8 +44,10 @@ def my_home_page_view(request):
 @login_required
 def my_applied_jobs_view(request):
     is_empty = False
+    # my_jobs = Profile.objects.get(user=request.user).applied_job.all()
     # get profile for requested user
-    my_jobs = Profile.objects.get(user=request.user).applied_job.all()
+    profile = Profile.objects.get(user=request.user)
+    my_jobs = Jobapplication.objects.filter(applicant=profile).all()
     is_empty = False if len(my_jobs) > 0 else True
     data = {
         "my_jobs": my_jobs,

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Make a donation{% endblock title %}
+
+{% block content %}
+<div class="ui very padded text container segment">
+  <h2 class="ui header">Make a Donation</h2>
+  <form class="ui form" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="ui primary button" type="submit">Donate now</button>
+  </form>
+</div>
+{% endblock content %}
