@@ -77,6 +77,9 @@ class Profile(models.Model):
     def get_applied_jobs(self):
         return self.applied_job.all()
 
+    def get_applied_jobs_count(self):
+        return self.applied_job.all().count()
+
 
 
 class Jobapplication(models.Model):

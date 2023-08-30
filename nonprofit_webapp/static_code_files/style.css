@@ -1,5 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300&family=Open+Sans:wght@300&display=swap');
+
 body {
     background: #F8F8F8 !important;
+    font-family: 'Nunito', sans-serif !important;
+    font-family: 'Open Sans', sans-serif !important;
 }
 
 .nav {
@@ -39,6 +43,6 @@ body {
     width: 10px !important;
 }
 
-.comment-box {
-    display: none;
+.custom-card {
+    padding: 20px; /* Adjust the padding as needed */
 }

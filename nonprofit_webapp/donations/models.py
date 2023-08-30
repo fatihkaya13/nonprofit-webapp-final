@@ -21,6 +21,12 @@ class Donation(models.Model):
     def __str__(self):
         return self.name
 
+    def get_currency(self):
+        return self.amount.currency
+
+    def get_amount(self):
+        return self.amount.amount
+
     # show newest donation on top
     class Meta:
         ordering = ('-created',)

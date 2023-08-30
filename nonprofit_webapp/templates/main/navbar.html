@@ -40,18 +40,22 @@
               </div>
            </div>
           </div>
-              <a href="{{path_to_my_home_page}}" class="{% if request.path == path_to_my_home_page %}active{% endif %} item">
+              <a href="{{path_to_my_home_page}}" class="ui {% if request.path == path_to_my_home_page %}active{% endif %} item">
                   <img src={{picture.url}} class="ui avatar image">&nbsp;
                    {{ request.user }}
               </a>
-              <a href="{% url 'account_logout' %}" class="ui item">
-                  Logout
-              </a>
+              <div class="right item">
+                <a href="{% url 'account_logout' %}" class="ui inverted button">
+                    Logout
+                </a>
+              </div>
           {% else %}
-          <a href="{% url 'account_login' %}" class="ui item">
-            Login
-          </a>
+          <div class="right item">
+            <a href="{% url 'account_login' %}" class="ui inverted button">
+              Login
+            </a>
+          </div>
           {% endif %}
       </div>
     </div>
- </div>
+</div>

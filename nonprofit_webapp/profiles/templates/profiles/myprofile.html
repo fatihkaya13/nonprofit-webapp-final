@@ -96,4 +96,23 @@
     </div>
  {%endif%}
 
+ <div class="ui header">
+    Donations
+</div>
+ <div class="ui link cards">
+    {% for currency, amount in donations_dict.items %}
+    <div class="card custom-card">
+        <div class="ui statistic">
+            <div class="label">
+                {{ currency }}
+            </div>
+            <div class="value">
+                {{ amount }}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
 {% endblock content %}

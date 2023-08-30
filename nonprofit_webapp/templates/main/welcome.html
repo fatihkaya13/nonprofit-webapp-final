@@ -9,6 +9,39 @@ home
     <i class="circular users icon"></i>
     Welcome to the Non Profit Web App
 </h2>
+<div class="ui vertical stripe segment">
+    <div class="ui middle aligned stackable grid container">
+      <div class="row">
+        <div class="eight wide column">
+          <h3 class="ui header">We Help Organizations and Volunteers</h3>
+          <p>Empowering change-makers and connecting them with meaningful causes — our web app is your platform for driving positive impact in the non-profit sector.</p>
+          <h3 class="ui header">We Match Organizers with Volunteers</h3>
+          <p>Discover, engage, and make a difference effortlessly with our web app, where every click transforms into tangible support for social good."</p>
+        </div>
+        <div class="six wide right floated column">
+          {% load static %}
+          <img src={% static 'img/welcome-image1.jpg' %} alt="People give hand together" class="ui large bordered rounded image">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ui vertical stripe quote segment">
+    <div class="ui equal width stackable internally celled grid">
+      <div class="center aligned row">
+        <div class="column">
+          <h3>"This platform made it incredibly easy for me to find volunteer role"</h3>
+          <p>That is what they all say about us</p>
+        </div>
+        <div class="column">
+          <h3>"I've never felt more connected to the non-profit community; this app truly amplifies our impact."</h3>
+          <p>
+            <img src={% static 'img/manager-of-ngo.jpg' %} alt="Photo of testimonial owner" class="ui avatar image"> K. Lloyd - Director, UnityHealth Worldwide
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
 {% endblock content %}

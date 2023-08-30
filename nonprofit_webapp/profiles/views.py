@@ -32,12 +32,35 @@ def my_home_page_view(request):
             p_form.save()
             is_p_form_saved = True
 
+
+    # Create an empty dictionary to store currency sums
+    donation_amount_by_currencies = {}
+
+    # Iterate over the list and calculate the sum for each currency
+    for item in Donation.objects.filter(user=request.user).all():
+        print(item.get_amount())
+        print(item.get_currency())
+        amount = float(item.get_amount())
+        currency = item.get_currency()
+
+        # If the currency key doesn't exist in the dictionary, create it and initialize the sum
+        if currency not in donation_amount_by_currencies:
+            donation_amount_by_currencies[currency] = amount
+        else:
+            # If the currency key already exists, add the amount to the existing sum
+            donation_amount_by_currencies[currency] += amount
+
+
+
+    print(donation_amount_by_currencies)
+
     # create a data dictionary to send HTML templates
     data = {
         "profile": profile,
         "p_form": p_form,
         "is_p_form_saved": is_p_form_saved,
-        "is_not_found": is_not_found
+        "is_not_found": is_not_found,
+        "donations_dict": donation_amount_by_currencies
     }
 
     return render(request, "profiles/myprofile.html", data)
@@ -53,7 +76,6 @@ def my_applied_jobs_view(request):
         "my_jobs": my_jobs,
         "is_empty": is_empty
     }
-    print(data)
     return render(request, "profiles/my_applied_jobs.html", data)
 
 
@@ -66,5 +88,4 @@ def my_donations_view(request):
         "my_donations": my_donations,
         "is_empty": is_empty
     }
-    print(data)
     return render(request, "profiles/my_donations.html", data)
