@@ -1,0 +1,71 @@
+<div class="ui grid">
+    <div class="eleven wide column justified">
+        <div class="ui divided items">
+            {% for job in jobs %}
+            <div class="item">
+                <div class="image">
+                <img src={{job.image.url}}>
+                </div>
+                    <div class="content">
+                    <a class="header">{{ job.title }}</a>
+                    <div class="meta">
+                        <span class="organization">{{job.organization }}</span>
+                    </div>
+                    <div class="description">
+                        <p>{{job.description}}</p>
+                    </div>
+                    <div class="description">
+                        <i class="globe icon"></i>
+                        <span class="country">{{job.location}}</span>
+                    </div>
+                    <div class="extra">
+                        <div class="ui label">{{job.job_type}}</div>
+                        <div class="ui label">{{job.location_type}}</div>
+
+                    </div>
+                    <div class="extra">
+                        <div class="row">
+                            Tags &nbsp;
+                            {% for job_tag in job.get_tags%}
+                            <div class="ui teal tag label">
+                                {{job_tag}}
+                            </div>
+                            {% endfor %}
+                            {% comment %} VOLUNTEER JOB APPLICATION FORM {% endcomment %}
+
+                            <div class="ui right floated">
+
+                                {% comment %} USER PROFILE DOES NOT EXISTS {% endcomment %}
+                                {% if  profile == None %}
+                                <a href="{% url 'account_signup' %}" class="ui blue basic button">
+                                    Join to Apply
+                                    <i class="right chevron icon"></i>
+                                </a>
+
+                                {% comment %} USER HAS ALREADY APPLIED TO THE JOB {% endcomment %}
+                                {% elif job in profile.get_applied_jobs %}
+                                <button type="" disabled class="ui positive button">
+                                    Applied
+                                    <i class="right check icon"></i>
+                                </button>
+
+                                {% comment %} USER HAS NOT APPLIED TO THE JOB YET {% endcomment %}
+                                {% else %}
+                                <form action="{% url "volunteer_listing:apply-job"%}" method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="job_pk" value={{job.pk}}>
+                                    <button type="submit" class="ui primary button">
+                                        Apply
+                                        <i class="right chevron icon"></i>
+                                    </button>
+                                </form>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

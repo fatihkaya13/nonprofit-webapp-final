@@ -9,5 +9,14 @@
 
 {% include "./search_component.html"%}
 
+{% if job_not_found %}
+<div class="ui negative message">
+    <i class="close icon"></i>
+    <div class="header">
+      We can't find job based on search criteria
+    </div>
+</p></div>
+{% endif %}
+
 {% include "./job_list_component.html"%}
 {% endblock content %}
