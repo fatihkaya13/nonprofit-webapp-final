@@ -29,7 +29,6 @@ def jobs_list_view(request):
     return render(request, 'volunteer_listing/job_list.html', data)
 
 def filtered_jobs_list_view(request):
-    print("here HIT")
     if request.method == 'GET':
         # get form query parameter
         text_to_search = request.GET.get('job')
